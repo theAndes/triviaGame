@@ -1,0 +1,114 @@
+html {
+    box-sizing: border-box;
+  }
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body  {
+    color: #fff;
+    font-family: 'Spectral', serif;
+    background-image: url(../images/tex2res5.png);
+    }
+
+
+
+.container{
+    background-image: url(../images/CONSTITUTION.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 690px;
+    text-align: center;
+    }
+
+
+
+
+
+
+header {
+    padding:25px; 
+    margin: auto;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 2.4em; 
+}
+
+.hide{
+    display: none;
+}
+
+#game{ 
+    line-height: 1.6;
+    padding: 0 10px;
+    width: 80%;
+  /*  border:3px double #0077B5;*/
+    height: 500px;
+    margin: auto;
+    background-color: rgba(32, 22, 32, 0.6);
+}
+
+#start{
+    background-color: aliceblue;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25em;
+    margin-top: 30px;
+    width: 90%;
+    height: 30px;
+    border: none;
+    border-radius: 1pc;
+    cursor: pointer;
+    color: #0077B5;
+}
+#start:hover{
+    transition: 1s;
+    opacity: .7;
+}
+#intro-text{
+    font-size: 1.25em;
+    margin-top: 25px; 
+}
+
+#clock-display{
+    font-size: 1.5em;
+    padding-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer{
+    margin:1.5em;
+    text-align: center;
+}
+a {
+    color: #0077B5;
+    font-size: 1em;
+}
+a:link {
+    text-decoration: none;
+}
+a:hover{
+    color: #0F9D58;
+}
+
