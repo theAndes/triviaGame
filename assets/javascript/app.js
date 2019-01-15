@@ -4,7 +4,7 @@ let questions = [
         question:"The idea of self-government is in the first three words of the Constitution. What are these words?",
         answer:"We the People",
         others: ['test','test','test'],
-        image:''
+        image:'assets/images/CONSTITUTION.jpg'
     },
     Q2={
         question:"How many amendments does the Constitution have?",
@@ -22,7 +22,7 @@ let questions = [
         question:"How many U.S. Senators are there?",
         answer:"one hundred (100)",
         others: ['test','test','test'],
-        image:'assets/images/senators.png'
+        image:'assets/images/senators.jpg'
     },
     Q5={
         question:"We elect a U.S. Representative for how many years?",
