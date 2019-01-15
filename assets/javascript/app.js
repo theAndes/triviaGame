@@ -1,87 +1,110 @@
-let questions = {
-    Q1:{
+//Qs, As, and Images
+let questions = [
+    Q1={
         question:"The idea of self-government is in the first three words of the Constitution. What are these words?",
         answer:"We the People",
-        others: ['','',''],
+        others: ['test','test','test'],
         image:''
     },
-    Q2:{
+    Q2={
         question:"How many amendments does the Constitution have?",
         answer:"twenty-seven (27)",
-        others: ['','',''],
-        image:''
+        others: ['test','test','test'],
+        image:'assets/images/27_Amendments.jpg'
     },
-    Q3:{
+    Q3={
         question:"Who is in charge of the executive branch?",
         answer:"the President",
-        others: ['','',''],
-        image:''
+        others: ['test','test','test'],
+        image:'assets/images/prez.jpeg'
     },
-    Q4:{
+    Q4={
         question:"How many U.S. Senators are there?",
         answer:"one hundred (100)",
-        others: ['','',''],
-        image:''
+        others: ['test','test','test'],
+        image:'assets/images/senators.png'
     },
-    Q5:{
+    Q5={
         question:"We elect a U.S. Representative for how many years?",
         answer:"two (2)",
-        others: ['','',''],
-        image:''
+        others: ['test','test','test'],
+        image:'assets/images/two.png'
     },
-    Q6:{
+    Q6={
         question:"Who was President during World War I?",
         answer:"Woodrow Wilson",
-        others: ['','',''],
-        image:''
+        others: ['test','test','test'],
+        image:'assets/images/Wilson_1919.png'
     },
-    Q7:{
+    Q7={
         question:"Who was President during World War II?",
         answer:"Franklin Roosevelt ",
-        others: ['','',''],
-        image:''
+        others: ['test','test','test'],
+        image:'assets/images/roosevelt.jpg'
     },
-    Q8:{
+    Q8={
         question:"What territory did the United States buy from France in 1803?",
         answer:"Louisiana",
-        others: ['','',''],
-        image:''
+        others: ['test','test','test'],
+        image:'assets/images/louisiana_Purchase.png'
     },
     
-    Q9:{
+    Q9={
         question:"When was the Constitution written?",
         answer:"1787",
-        others: ['','',''],
-        image:''
+        others: ['test','test','test'],
+        image:'assets/images/washington.jpg'
     },
-    Q10:{
+    Q10={
         question:"Who wrote the Declaration of Independence?",
-        answer:"Thomas Jefferson",
-        others: ['','',''],
+        answer:  "Thomas Jefferson",
+        others: ['Andrew Jackson','Paul Revere','ALexander Hamilton'],
         image: 'assets/images/tomJeff.jpg'
     },
-}
+]
 
 
-window.onload = function() {
-    $("#start").on("click", start);
-    
-};
+
+
 
 let intervalId;
-let clockRunning = false;
-let time = 25;
+let clockRunning = false; //clock checker
+let time = 5; //timer
+let el1 =  Math.floor(Math.random() * questions.length); //used to randomize the questions
+let notAnswered= 0, wrong= 0, right = 0; //Stats
+
+window.onload = function() {
+    $('#start').on("click", start);
+    
+
+
+
 
 
 function reset() {
-    clearInterval(intervalId);
-    time = 25;
-    clockRunning = false;
-    //  Show the start button and hide the clock
-    $('#intro').removeClass('hide');
+    if(time===0 && questions.length != 0){
+        el1 =  Math.floor(Math.random() * questions.length)
+        $('.time-end').remove()
+        $('.questions p').remove()
 
-    //$('#clock-display').addClass('hide')
-    $('#clock').text('00:25')  
+        time = 5;
+        clearInterval(intervalId);
+        $('#clock').text('00:25')
+        start()
+    }
+    
+    
+    else{
+        $("#start").on("click", start);
+        
+        $('.time-end').html('<p>Answered correctly: '+ right +
+        '<p>Answered incorrectly: '+  wrong
+        +'<p>Unanswered Questions: ' + notAnswered +'</p><div><button id="start">ReStart Trivia</button><div>')
+       
+        $('.questions p').remove()
+        $(this).on("click", start);
+        
+    }
 }
 
 
@@ -94,11 +117,16 @@ function start() {
     if (!clockRunning) {
         intervalId = setInterval(count,1000)
         clockRunning = true;
+        
+        
     }
     //Hide the start button and intro
+
     $('#intro').addClass('hide');
     //Show the clock
     $('#clock-display').removeClass('hide');
+    
+    question(el1);
 
   }
 
@@ -108,9 +136,8 @@ function start() {
   
   
   function count() {
-    if (time === 0 && clockRunning===true) {
+    if (time === 0 && clockRunning === true) {
         timeOut()
-        console.log(time);
         
     }
     else{
@@ -126,20 +153,45 @@ function start() {
   }
   
   
-  
+  //WIll need to change the objects in this function
   function timeOut(){
-      $('.questions-answers').append(
-          '<div class="time-end"><p>You ran out of time!</p><p>The answer is:<p><span id="answer"></span></p>'+ questions.answer +'</div><div id="image"><img src="'+questions.Q10.image+'"></div>' );
-      clockRunning = false;
-      clearInterval(intervalId);
 
+    notAnswered++
+
+      $('.questions-answers').append(
+          '<div class="time-end"><div><p>You ran out of time!</p></div><div id="image"><img src="'
+          +  questions[el1].image +'"></div><p>The answer is:<p>'
+          + questions[el1].answer +'</p><div>' );
+      
+
+          $('.answers ul').remove();
+
+
+        questions.splice(el1,1) 
+        clockRunning = false;
+        clearInterval(intervalId);
+        setTimeout(reset,5000)
+        
+        
+
+      
 
   }
   
   
   
   
-  
+  function question(q){
+    questions[q].others.unshift(questions[q].answer)
+$('.questions').append('<p>' + questions[q].question +'</p>')
+for (var i = 0; i < questions[q].others.length; i++) {
+        var el2 = questions[q].others[i];
+        $('.answers').append(
+            '<ul><li class="answer">'+ el2 +'</li></ul>')
+        }
+     
+
+  }
   
   
   
@@ -171,3 +223,11 @@ function start() {
     }
     return minutes + ":" + seconds;
   }
+
+
+
+
+
+
+
+};

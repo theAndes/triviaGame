@@ -77,23 +77,24 @@ header {
     padding-top: 20px;
 }
 
+.questions-answers{
+    font-size: 1.25em;
+    margin-top: 20px;
+}
+.answer{
+    
+    background-color: rgb(239, 247, 255);
+    font-family: 'Roboto', sans-serif;
+    margin: 15px auto;
+    color: black;
+    border-radius: 1pc;
+    cursor: pointer;
+    width: 80%;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+img {
+    width:50%;
+}
 
 
 
@@ -112,3 +113,14 @@ a:hover{
     color: #0F9D58;
 }
 
+@media only screen and (min-width: 600px){
+    img{
+        width: 50%;
+        height: 280px;
+    }
+}
+@media only screen and (min-width: 768px) {
+    img{
+        width: unset;
+        height: 280px;
+    }
