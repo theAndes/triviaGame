@@ -21,7 +21,7 @@ body  {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: 690px;
+    height: 740px;
     text-align: center;
     }
 
@@ -44,9 +44,9 @@ header {
 #game{ 
     line-height: 1.6;
     padding: 0 10px;
-    width: 80%;
+    width: 85%;
   /*  border:3px double #0077B5;*/
-    height: 500px;
+    height: 550px;
     margin: auto;
     background-color: rgba(32, 22, 32, 0.6);
 }
@@ -93,7 +93,7 @@ header {
 }
 
 img {
-    width:50%;
+    width:75%;
 }
 
 
