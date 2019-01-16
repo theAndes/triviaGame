@@ -46,7 +46,7 @@ let questions = [
         question:"What territory did the United States buy from France in 1803?",
         answer:"Louisiana",
         others: ['test','test','test'],
-        image:'assets/images/louisiana_Purchase.png'
+        image:'assets/images/louisiana_Purchase.jpg'
     },
     
     Q9={
