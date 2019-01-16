@@ -69,9 +69,15 @@ let questions = [
 
 let intervalId;
 let clockRunning = false; //clock checker
-let time = 5; //timer
+let time = 25; //timer
 let el1 =  Math.floor(Math.random() * questions.length); //used to randomize the questions
 let notAnswered= 0, wrong= 0, right = 0; //Stats
+let userSelection;
+
+
+
+
+
 
 window.onload = function() {
     $('#start').on("click", start);
@@ -87,7 +93,7 @@ function reset() {
         $('.time-end').remove()
         $('.questions p').remove()
 
-        time = 5;
+        time = 25;
         clearInterval(intervalId);
         $('#clock').text('00:25')
         start()
@@ -182,14 +188,58 @@ function start() {
   
   
   function question(q){
-    questions[q].others.unshift(questions[q].answer)
-$('.questions').append('<p>' + questions[q].question +'</p>')
-for (var i = 0; i < questions[q].others.length; i++) {
-        var el2 = questions[q].others[i];
-        $('.answers').append(
-            '<ul><li class="answer">'+ el2 +'</li></ul>')
+      questions[q].others.unshift(questions[q].answer)
+        shuffle(questions[q].others);
+      
+      function shuffle(arra1) {
+        let counter = arra1.length;
+        let temp;
+        let index;
+    
+        
+        while (counter > 0) {
+    
+            index = Math.floor(Math.random() * counter);
+    
+            counter--;
+   
+            temp = arra1[counter];
+            arra1[counter] = arra1[index];
+            arra1[index] = temp;
         }
-     
+        return arra1;
+    }
+      
+      $('.questions').append('<p>' + questions[q].question +'</p>')
+      
+      for (var i = 0; i <questions[q].others.length ; i++) {
+        
+          
+          var el2 = questions[q].others[i];
+           
+           
+            $('.answers').append(
+                '<ul><li class="answer" value=' + i + '>'
+                + el2 +'</li></ul>')
+            }
+
+            $('.answer').click(function(){
+                userSelection = $(this).attr('value');
+                console.log(userSelection);
+                
+                if(userSelection == questions[el1].others.indexOf(questions[el1].answer)){
+
+
+                
+                console.log('correct');
+                }
+                else{
+                    console.log('not correct');
+                    
+                }
+
+            })
+            
 
   }
   
