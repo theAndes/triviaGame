@@ -3,7 +3,7 @@ let questions = [
     Q1={
         question:"The idea of self-government is in the first three words of the Constitution. What are these words?",
         answer:"We the People",
-        others: ['test','test','test'],
+        others: ['Form perfect Union','Establish this Constitution','The Blessings of Liberty '],
         image:'assets/images/CONSTITUTION.jpg'
     },
     Q2={
@@ -69,21 +69,25 @@ let questions = [
 
 let intervalId;
 let clockRunning = false; //clock checker
-let time = 25; //timer
+let time = 10; //timer
 let el1 =  Math.floor(Math.random() * questions.length); //used to randomize the questions
 let notAnswered= 0, wrong= 0, right = 0; //Stats
 let userSelection;
 let holdAsked=[];
+let tempOthers =[]
 
 
 
 
 
 
-window.onload = function() {
-    $('#start').on("click", start);
-    
-};
+
+$('#start').on('click',function(){
+    start()
+    console.log('start button clicked');});
+    $('#restart').hide();
+
+    $('#restart').on('click',start);
 
 
 
@@ -95,33 +99,25 @@ function reset() {
         $('.time-end').remove()
         $('.questions p').remove()
 
-        time = 25;
+        time = 10;
         clearInterval(intervalId);
-        $('#clock').text('00:25')
+        $('#clock').text('00:10')
         start()
     }
     
     
     else{
+    
+        
 
+        $('#clock').text('00:10')
         
-        $('#clock').text('00:25')
         
-        
-        $('.questions-answers').html('<p>Answered correctly: '+ right +
+        $('.questions-answers').html('<div id="removeMe"<p>Answered correctly: '+ right +
         '<p>Answered incorrectly: '+  wrong
-        +'<p>Unanswered Questions: ' + notAnswered +'</p><div><button id="start">ReStart Trivia</button><div>')
+        +'<p>Unanswered Questions: ' + notAnswered +'</p></div>')
         
-        $('.questions p').addClass()
-       
-        intervalId;
-        clockRunning = false; //clock checker
-        time = 25; //timer
-        questions=holdAsked;
-        el1 =  Math.floor(Math.random() * questions.length); //used to randomize the questions
-        notAnswered= 0, wrong= 0, right = 0; //Stats
-        userSelection;
-        holdAsked=[];
+        $('#restart').show()
         
     }
 }
@@ -131,18 +127,31 @@ function reset() {
 
 
 function start() {
-    
+        if(questions.length === 0 ){
+            console.log("Resart game");
+            $('#removeMe').remove()
+            $('#restart').hide()
+         //clock checker
+        time = 10; //timer
+        questions=holdAsked;
+        el1 =  Math.floor(Math.random() * questions.length); //used to randomize the questions
+        notAnswered= 0, wrong= 0, right = 0; //Stats
+        userSelection;
+        holdAsked=[]
+        tempOthers =[];
+        }
+
     //  TODO: Use setInterval to start the count here and set the clock to running.
     if (!clockRunning) {
         intervalId = setInterval(count,1000)
         clockRunning = true;
+        console.log('ingame');
         
         
     }
     //Hide the start button and intro
-    $('.questions p').removeClass('hide')
 
-    $('#intro').addClass('hide');
+    $('#intro').hide();
     //Show the clock
     $('#clock-display').removeClass('hide');
     
@@ -180,16 +189,16 @@ function start() {
     console.log('not answered' + notAnswered);
     
 
-      $('.questions-answers').html(
+      $('.questions-answers').append(
           '<div class="time-end"><div><p>You ran out of time!</p></div><div id="image"><img src="'
           +  questions[el1].image +'"></div><p>The answer is:<p>'
           + questions[el1].answer +'</p><div>' );
       
 
+          removeItem()
           //$('.answers ul').remove();
 
 
-        removeItem()
         
         
 
@@ -198,19 +207,26 @@ function start() {
   }
   
   function removeItem(){
-    $('.answers ul').remove();
+    $('.questions').remove();
     holdAsked.unshift(questions[el1])
     questions.splice(el1,1) 
     clockRunning = false;
     clearInterval(intervalId);
-    setTimeout(reset,5000)
+    setTimeout(reset,2000)
+    tempOthers=[]
   }
   
   
   function question(q){
-      questions[q].others.unshift(questions[q].answer)
-        shuffle(questions[q].others);
+       
       
+      for (let i = 0; i < questions[q].others.length; i++) {
+           tempOthers.unshift(questions[q].others[i]);
+          
+      }
+      tempOthers.unshift(questions[q].answer)
+      shuffle(tempOthers);
+
       function shuffle(arra1) {
         let counter = arra1.length;
         let temp;
@@ -230,17 +246,17 @@ function start() {
         return arra1;
     }
       
-      $('.questions').append('<p>' + questions[q].question +'</p>')
+      $('.questions-answers').append('<div class="questions"><p>' + questions[q].question +'</p></div>')
       
-      for (var i = 0; i <questions[q].others.length ; i++) {
+      for (var i = 0; i <tempOthers.length ; i++) {
         
           
-          var el2 = questions[q].others[i];
+          var el2 = tempOthers[i];
            
            
-            $('.answers').append(
-                '<ul><li class="answer" value=' + i + '>'
-                + el2 +'</li></ul>')
+            $('.questions').append(
+                ' <div class="answers"><ul><li class="answer" value=' + i + '>'
+                + el2 +'</li></ul></div>')
             }
 
             $('.answer').click(function(){
@@ -251,12 +267,24 @@ function start() {
                     right++
                     console.log('correct');
                     
+                    
+                    $('.questions-answers').append(
+                        '<div class="time-end"><div><p>You are correct!</p></div><div id="image"><img src="'
+                        +  questions[el1].image +'"></div><p>The answer is:<p>'
+                        + questions[el1].answer +'</p><div>' );
+
                     stop()
                     removeItem()
 
                 
                 }
                 else{
+                    
+                    $('.questions-answers').append(
+          '<div class="time-end"><div><p>No. You are wrong!</p></div><div id="image"><img src="'
+          +  questions[el1].image +'"></div><p>The correct answer is:<p>'
+          + questions[el1].answer +'</p><div>' );
+                    
                     wrong++
                     console.log('not correct');
                     stop()

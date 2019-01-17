@@ -46,12 +46,12 @@ header {
     padding: 0 10px;
     width: 85%;
   /*  border:3px double #0077B5;*/
-    height: 550px;
+    min-height: 550px;
     margin: auto;
     background-color: rgba(32, 22, 32, 0.6);
 }
 
-#start{
+.start{
     background-color: aliceblue;
     font-family: 'Roboto', sans-serif;
     font-size: 1.25em;
@@ -63,7 +63,7 @@ header {
     cursor: pointer;
     color: #0077B5;
 }
-#start:hover{
+.start:hover{
     transition: 1s;
     opacity: .7;
 }
