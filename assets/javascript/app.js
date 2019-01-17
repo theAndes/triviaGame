@@ -9,50 +9,50 @@ let questions = [
     Q2={
         question:"How many amendments does the Constitution have?",
         answer:"twenty-seven (27)",
-        others: ['test','test','test'],
+        others: ['twenty-one (21)','twenty-nine (29)','twenty-five (25)'],
         image:'assets/images/27_Amendments.jpg'
     },
     Q3={
         question:"Who is in charge of the executive branch?",
-        answer:"the President",
-        others: ['test','test','test'],
+        answer:"The President",
+        others: ['The Attorney General','The Supreme Court','Speaker of the House'],
         image:'assets/images/prez.jpeg'
     },
     Q4={
         question:"How many U.S. Senators are there?",
         answer:"one hundred (100)",
-        others: ['test','test','test'],
+        others: ['fifty (50)','435','five hundred (500)'],
         image:'assets/images/senators.jpg'
     },
     Q5={
         question:"We elect a U.S. Representative for how many years?",
         answer:"two (2)",
-        others: ['test','test','test'],
+        others: ['four (4)','six (6)','eight (8)'],
         image:'assets/images/two.png'
     },
     Q6={
         question:"Who was President during World War I?",
         answer:"Woodrow Wilson",
-        others: ['test','test','test'],
+        others: ['Franklin Roosevelt','Calvin Coolidge','William Howard Taft'],
         image:'assets/images/Wilson_1919.png'
     },
     Q7={
         question:"Who was President during World War II?",
-        answer:"Franklin Roosevelt ",
-        others: ['test','test','test'],
+        answer:"Franklin Roosevelt",
+        others: ['Woodrow Wilson','Calvin Coolidge','William Howard Taft'],
         image:'assets/images/roosevelt.jpg'
     },
     Q8={
         question:"What territory did the United States buy from France in 1803?",
         answer:"Louisiana",
-        others: ['test','test','test'],
-        image:'assets/images/louisiana_Purchase.jpg'
+        others: ['Florida','Oregon Territory','Alaska'],
+        image:'assets/images/Louisiana_Purchase.jpg'
     },
     
     Q9={
         question:"When was the Constitution written?",
         answer:"1787",
-        others: ['test','test','test'],
+        others: ['1785','1786','1789'],
         image:'assets/images/washington.jpg'
     },
     Q10={
@@ -73,6 +73,7 @@ let time = 25; //timer
 let el1 =  Math.floor(Math.random() * questions.length); //used to randomize the questions
 let notAnswered= 0, wrong= 0, right = 0; //Stats
 let userSelection;
+let holdAsked=[];
 
 
 
@@ -82,13 +83,14 @@ let userSelection;
 window.onload = function() {
     $('#start').on("click", start);
     
+};
 
 
 
 
 
 function reset() {
-    if(time===0 && questions.length != 0){
+    if( questions.length != 0){
         el1 =  Math.floor(Math.random() * questions.length)
         $('.time-end').remove()
         $('.questions p').remove()
@@ -101,14 +103,25 @@ function reset() {
     
     
     else{
-        $("#start").on("click", start);
+
         
-        $('.time-end').html('<p>Answered correctly: '+ right +
+        $('#clock').text('00:25')
+        
+        
+        $('.questions-answers').html('<p>Answered correctly: '+ right +
         '<p>Answered incorrectly: '+  wrong
         +'<p>Unanswered Questions: ' + notAnswered +'</p><div><button id="start">ReStart Trivia</button><div>')
+        
+        $('.questions p').addClass()
        
-        $('.questions p').remove()
-        $(this).on("click", start);
+        intervalId;
+        clockRunning = false; //clock checker
+        time = 25; //timer
+        questions=holdAsked;
+        el1 =  Math.floor(Math.random() * questions.length); //used to randomize the questions
+        notAnswered= 0, wrong= 0, right = 0; //Stats
+        userSelection;
+        holdAsked=[];
         
     }
 }
@@ -127,6 +140,7 @@ function start() {
         
     }
     //Hide the start button and intro
+    $('.questions p').removeClass('hide')
 
     $('#intro').addClass('hide');
     //Show the clock
@@ -163,20 +177,19 @@ function start() {
   function timeOut(){
 
     notAnswered++
+    console.log('not answered' + notAnswered);
+    
 
-      $('.questions-answers').append(
+      $('.questions-answers').html(
           '<div class="time-end"><div><p>You ran out of time!</p></div><div id="image"><img src="'
           +  questions[el1].image +'"></div><p>The answer is:<p>'
           + questions[el1].answer +'</p><div>' );
       
 
-          $('.answers ul').remove();
+          //$('.answers ul').remove();
 
 
-        questions.splice(el1,1) 
-        clockRunning = false;
-        clearInterval(intervalId);
-        setTimeout(reset,5000)
+        removeItem()
         
         
 
@@ -184,7 +197,14 @@ function start() {
 
   }
   
-  
+  function removeItem(){
+    $('.answers ul').remove();
+    holdAsked.unshift(questions[el1])
+    questions.splice(el1,1) 
+    clockRunning = false;
+    clearInterval(intervalId);
+    setTimeout(reset,5000)
+  }
   
   
   function question(q){
@@ -228,13 +248,19 @@ function start() {
                 console.log(userSelection);
                 
                 if(userSelection == questions[el1].others.indexOf(questions[el1].answer)){
-
+                    right++
+                    console.log('correct');
+                    
+                    stop()
+                    removeItem()
 
                 
-                console.log('correct');
                 }
                 else{
+                    wrong++
                     console.log('not correct');
+                    stop()
+                    removeItem()
                     
                 }
 
@@ -245,14 +271,17 @@ function start() {
   
   
   
+  function stop() {
+
+    clearInterval(intervalId);
+    clockRunning = false;
+  }
   
   
   
   
   
-  
-  //  THIS FUNCTION IS DONE FOR US!
-  //  We do not need to touch it.
+ 
   
   function timeConverter(t) {
   
@@ -280,4 +309,3 @@ function start() {
 
 
 
-};
