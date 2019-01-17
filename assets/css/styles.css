@@ -11,13 +11,13 @@ html {
 body  {
     color: #fff;
     font-family: 'Spectral', serif;
-    background-image: url(../images/tex2res5.png);
+    background-image: url(../images/tex2res5.png); /* background image for body*/
     }
 
 
 
 .container{
-    background-image: url(../images/CONSTITUTION.jpg);
+    background-image: url(../images/CONSTITUTION.jpg);/* background image for main container*/
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
@@ -37,16 +37,18 @@ header {
     font-size: 2.4em; 
 }
 
+
 .hide{
     display: none;
 }
+
 
 #game{ 
     line-height: 1.6;
     padding: 0 10px;
     width: 85%;
   /*  border:3px double #0077B5;*/
-    min-height: 550px;
+    min-height: 550px; /* min height set to adjust for larger images*/
     margin: auto;
     background-color: rgba(32, 22, 32, 0.6);
 }
@@ -93,7 +95,7 @@ header {
 }
 
 img {
-    width:75%;
+    width:75%; /* image for answers */
 }
 
 

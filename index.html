@@ -19,11 +19,12 @@
 
 
 
-    <!--##########################-->
+    <!--########################## this container holds the entire contents less the footer
+    This is to add a background image that adjust to window size################-->
     <section class="container">
 
 
-        <!--##########################-->
+        <!--##########################the header. never changes##################-->
         <header>
             <p>
                 <h1> The United States </h1>
@@ -31,10 +32,11 @@
         </header>
 
 
-        <!--##########################-->
+        <!--##########################Game play container################-->
         <section id="game">
 
-            <!--##########################-->
+            <!--########################## this is the first set of information the user will
+            see. it will be hidden by jquery once click###############-->
             <div id="intro">
                 <button id="start" class="start">Start</button>
                 <div id="intro-text">
@@ -45,15 +47,20 @@
                     <p>How well will you do?</p>
                 </div>
             </div>
+           
+            <!--Timer for each question-->
             <div id="clock-display" class="hide">Time Remaining: &nbsp; <span id="clock">00:10</span></div>
             
-            <!--##########################-->
+            <!--#############Questions, answers, and results will by added and remove here by user 
+                selections and jQuery#############-->
             <div class="questions-answers">
                 
                
                     
         
             </div>
+
+            <!--This will be hidden until game is over. This will restart game-->
             <button id="restart" class="start">Restart</button>
 
 
@@ -62,7 +69,7 @@
     </section>
 
     
-    <!--##########################-->
+    <!--#########Back to portfolio link#################-->
     <footer>
         <a href="https://theandes.github.io/Responsive-Portfolio/portfolio.html"><i class="fab fa-github"></i>Back to portfolio</a>
     </footer>
