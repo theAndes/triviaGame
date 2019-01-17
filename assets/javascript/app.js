@@ -263,7 +263,7 @@ function start() {
                 userSelection = $(this).attr('value');
                 console.log(userSelection);
                 
-                if(userSelection == questions[el1].others.indexOf(questions[el1].answer)){
+                if(userSelection == tempOthers.indexOf(questions[el1].answer)){
                     right++
                     console.log('correct');
                     
