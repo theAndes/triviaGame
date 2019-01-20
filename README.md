@@ -10,6 +10,10 @@
 1. Capture user selection into a variable
     1. Check user selection against correct answer
 1. Delete question from list to ensure it is not asked again
+1. When game is compete display stats and provide option to restart game
+
+*get user stats
+    *counter for timeout, wrong, right
   
   
   
