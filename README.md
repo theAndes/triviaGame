@@ -12,9 +12,10 @@
 1. Delete question from list to ensure it is not asked again
 1. When game is compete display stats and provide option to restart game
 
-*get user stats
-    *counter for timeout, wrong, right
-  
+* get user stats
+    * counter for timeout, wrong, right
+1. Restart will not reload page. It will reset all variables
+    1. Retrieve deleted questions
   
   
 [Link to Game!](https://theandes.github.io/triviaGame/)
