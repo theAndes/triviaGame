@@ -1,4 +1,5 @@
-# triviaGame ###### mobile
+# triviaGame 
+###### mobile
 
 
 1. List of question objects
